@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IPL Fan Zone</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════ -->
+<div id="login-page" class="login-page">
+  <div class="login-particles" id="login-particles"></div>
+
+  <!-- Left: Teams display -->
+  <div class="lp-left">
+    <div class="lp-brand">
+      <section class="hero">
+    <div class="ipl-container">
+        <div class="rotating-ring"></div>
+        <img src="images/iplLogo.jpg" alt="IPL Logo" class="ipl-logo">
+    </div>
+</section>
+      <h1 class="lp-title">INDIAN PREMIER LEAGUE</h1>
+      <p class="lp-sub">The World's Greatest Cricket League</p>
+    </div>
+   
+  </div>
+
+  <!-- Right: Login form -->
+  <div class="lp-right">
+    <div class="lp-card">
+      <div class="lp-card-logo">🏏</div>
+      <h2 class="lp-card-title">IPL <span class="gold">Fan Zone</span></h2>
+      <p class="lp-card-sub">Enter your details to get started</p>
+
+      <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+        <div class="lp-field">
+          <label><i class="fas fa-user"></i> Username</label>
+          <input id="lf-name" type="text" placeholder="Your full name" maxlength="40" autocomplete="off"/>
+          <span class="lp-err" id="err-name"></span>
+        </div>
+        <div class="lp-field">
+          <label><i class="fas fa-mobile-alt"></i> Mobile Number</label>
+          <div class="lp-phone-row">
+            <span class="lp-cc">+91</span>
+            <input id="lf-phone" type="tel" placeholder="10-digit number" maxlength="10"/>
+          </div>
+          <span class="lp-err" id="err-phone"></span>
+        </div>
+        <button type="submit" class="lp-btn">
+          <span>Enter the Arena</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </form>
+      <p class="lp-note"><i class="fas fa-lock"></i> No password needed — just your fan identity!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN WEBSITE
+══════════════════════════════════════════ -->
+<div id="main-site" class="hidden">
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="nav-brand">🏏 IPL <span class="gold">Fan Zone</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home"     class="nl active">Home</a></li>
+      <li><a href="#about"    class="nl">About Team</a></li>
+      <li><a href="#players"  class="nl">Players</a></li>
+      <li><a href="#schedule" class="nl">Schedule</a></li>
+      <li><a href="#stats"    class="nl">Statistics</a></li>
+      <li><a href="#news"     class="nl">News</a></li>
+      <li><a href="#gallery"  class="nl">Gallery</a></li>
+      <li><a href="#fanzone"  class="nl">Fan Zone</a></li>
+      <li><a href="#contact"  class="nl">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-user" id="nav-user"></div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker-bar">
+    <span class="ticker-live">🔴 LIVE</span>
+    <div class="ticker-wrap"><div class="ticker-track" id="ticker-track"></div></div>
+  </div>
+
+  <!-- ══ 1. HOME ══ -->
+  <section id="home" class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <span class="hero-badge">🏆 IPL 2026 Season</span>
+      <h1 class="hero-heading">Welcome to<br/><span class="gold">IPL Fan Zone</span></h1>
+      <p class="hero-desc">Your ultimate hub for team info, player profiles, live scores, schedules and fan engagement.</p>
+      <div class="hero-btns">
+        <a href="#about" class="btn-gold">Explore Teams</a>
+        <a href="#schedule" class="btn-outline">View Schedule</a>
+      </div>
+      <div class="hero-counters">
+        <div class="hc"><span class="hc-n">10</span><span class="hc-l">Teams</span></div>
+        <div class="hc"><span class="hc-n">17</span><span class="hc-l">Seasons</span></div>
+        <div class="hc"><span class="hc-n">500+</span><span class="hc-l">Players</span></div>
+        <div class="hc"><span class="hc-n">1B+</span><span class="hc-l">Fans</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+
+    <div class="trophy-box">
+        <img src="images/trophy.jpg" alt="IPL Trophy" class="ipl-trophy">
+    </div>
+
+
+</div>
+  </section>
+
+  <!-- ══ 2. ABOUT TEAM ══ -->
+  <section id="about" class="section bg-dark2">
+    <div class="sec-hdr"><h2 class="sec-title">About <span class="gold">IPL Teams</span></h2><p class="sec-sub">History, achievements & home stadiums of all franchises</p></div>
+    <div class="about-grid" id="about-teams-grid"></div>
+    <!-- Team detail modal -->
+    <div class="modal-overlay hidden" id="team-modal-overlay" onclick="closeTeamModal()">
+      <div class="team-modal" id="team-modal-box" onclick="event.stopPropagation()">
+        <button class="modal-x" onclick="closeTeamModal()">✕</button>
+        <div id="team-modal-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. PLAYERS ══ -->
+  <section id="players" class="section bg-dark">
+    <div class="sec-hdr"><h2 class="sec-title">Star <span class="gold">Players</span></h2><p class="sec-sub">Profiles, roles and statistics of IPL legends</p></div>
+    <div class="filter-row" id="player-filters">
+      <button class="fb active" onclick="filterPlayers('all',this)">All</button>
+      <button class="fb" onclick="filterPlayers('batsman',this)">🏏 Batsmen</button>
+      <button class="fb" onclick="filterPlayers('bowler',this)">⚡ Bowlers</button>
+      <button class="fb" onclick="filterPlayers('allrounder',this)">🌟 All-Rounders</button>
+      <button class="fb" onclick="filterPlayers('wicketkeeper',this)">🧤 Wicket-Keepers</button>
+    </div>
+    <div class="players-grid" id="players-grid"></div>
+  </section>
+
+  <!-- ══ 4. SCHEDULE ══ -->
+  <!-- <section id="schedule" class="section bg-dark2">
+    <div class="sec-hdr"><h2 class="sec-title">Match <span class="gold">Schedule</span></h2><p class="sec-sub">Upcoming fixtures, completed matches & venues</p></div>
+    <div class="filter-row">
+      <button class="fb active" onclick="filterSchedule('all',this)">All Matches</button>
+      <button class="fb" onclick="filterSchedule('upcoming',this)">Upcoming</button>
+      <button class="fb" onclick="filterSchedule('completed',this)">Completed</button>
+    </div>
+    <div class="schedule-grid" id="schedule-grid"></div>
+  </section> -->
+
+
+  <section id="schedule" class="section bg-dark2">
+
+    <div class="sec-hdr">
+        <h2 class="sec-title">
+            Match <span class="gold">Schedule</span>
+        </h2>
+
+        <p class="sec-sub">
+            Upcoming fixtures, completed matches & venues
+        </p>
+    </div>
+
+
+
+    <div class="filter-row">
+
+
+      <!-- All Matches -->
+      <button class="fb active" onclick="filterSchedule('all',this)">
+        🏏 All Matches
+      </button>
+
+
+
+      <!-- Live Match -->
+      <button class="fb" onclick="filterSchedule('live',this)">
+        🔴 Live
+      </button>
+
+
+
+      <!-- Upcoming Matches -->
+      <button class="fb" onclick="filterSchedule('upcoming',this)">
+        ⏳ Upcoming
+      </button>
+
+
+
+      <!-- Completed Matches -->
+      <button class="fb" onclick="filterSchedule('completed',this)">
+        ✅ Completed
+      </button>
+
+
+    </div>
+
+
+
+
+    <div class="schedule-grid" id="schedule-grid"></div>
+
+
+</section>
+  <!-- ══ 5. STATISTICS ══ -->
+  <section id="stats" class="section bg-dark">
+    <div class="sec-hdr"><h2 class="sec-title">IPL <span class="gold">Statistics</span></h2><p class="sec-sub">Records, run scorers, wicket takers & win/loss data</p></div>
+    <div class="stats-cards" id="stats-cards"></div>
+    <div class="wl-grid" id="wl-grid"></div>
+    <div class="champions-wrap">
+      <h3 class="tbl-title">🏆 IPL Champions History</h3>
+      <div class="tbl-scroll"><table id="champs-table"><thead><tr><th>Year</th><th>Champion</th><th>Runner-Up</th><th>Venue</th></tr></thead><tbody id="champs-tbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ══ 6. NEWS ══ -->
+  <!-- <section id="news" class="section bg-dark2">
+    <div class="sec-hdr"><h2 class="sec-title">Latest <span class="gold">News</span></h2><p class="sec-sub">Team updates, match reports & transfer news</p></div>
+    <div class="news-grid" id="news-grid"></div>
+  </section> -->
+
+ <section id="news" class="section bg-dark2">
+    <div class="sec-hdr">
+        <h2 class="sec-title">Latest <span class="gold">News</span></h2>
+        <p class="sec-sub">
+            Team updates, match reports & IPL 2026 breaking news
+        </p>
+    </div>
+
+    <div class="news-grid" id="news-grid"></div>
+</section>
+
+<div id="newsPopup" class="popup">
+    <div class="popup-box">
+        <span class="close" onclick="closeNews()">✖</span>
+
+        <h2 id="popupTitle"></h2>
+
+        <div id="popupBody"></div>
+    </div>
+</div>
+  <!-- ══ 7. GALLERY ══ -->
+  <section id="gallery" class="section bg-dark">
+    <div class="sec-hdr"><h2 class="sec-title">IPL <span class="gold">Gallery</span></h2><p class="sec-sub">Team photos, match moments & trophy celebrations</p></div>
+    <div class="filter-row">
+      <button class="fb active" onclick="filterGallery('all',this)">All</button>
+      <button class="fb" onclick="filterGallery('team',this)">Team Photos</button>
+      <button class="fb" onclick="filterGallery('match',this)">Match Photos</button>
+      <button class="fb" onclick="filterGallery('trophy',this)">Trophies</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </section>
+
+  <!-- ══ 8. FAN ZONE ══ -->
+  <section id="fanzone" class="section bg-dark2">
+    <div class="sec-hdr"><h2 class="sec-title">❤️ Fan <span class="gold">Zone</span></h2><p class="sec-sub">Vote, comment, play the IPL quiz & check the points table</p></div>
+    <div class="fz-grid">
+      <!-- Poll -->
+      <div class="fz-block">
+        <h3 class="fz-h">📊 Who Wins IPL 2025?</h3>
+        <div id="poll-box"></div>
+      </div>
+      <!-- Comments -->
+      <div class="fz-block">
+        <h3 class="fz-h">💬 Fan Comments</h3>
+        <div class="comments-list" id="comments-list"></div>
+        <div class="comment-form">
+          <input id="cm-name" type="text" placeholder="Your name" maxlength="30"/>
+          <textarea id="cm-text" placeholder="Share your thoughts..." rows="3" maxlength="200"></textarea>
+          <button class="btn-gold sm" onclick="postComment()">Post Comment</button>
+        </div>
+      </div>
+      <!-- Quiz -->
+      <div class="fz-block">
+        <h3 class="fz-h">🧠 IPL Quiz</h3>
+        <div id="quiz-box"></div>
+      </div>
+    </div>
+
+    <!-- Points Table -->
+    <div class="pt-wrap">
+      <h3 class="tbl-title">📊 Points Table — IPL 2026</h3>
+      <div class="tbl-scroll"><table id="points-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>NRR</th><th>Pts</th></tr></thead><tbody id="points-tbody"></tbody></table></div>
+    </div>
+
+    <!-- Live Score -->
+    <div class="livescore-wrap">
+      <h3 class="tbl-title">📺 Live Score</h3>
+      <div id="live-score-box"></div>
+    </div>
+  </section>
+
+  <!-- ══ 9. CONTACT ══ -->
+  <section id="contact" class="section bg-dark">
+    <div class="sec-hdr"><h2 class="sec-title">📞 Contact <span class="gold">Us</span></h2><p class="sec-sub">Get in touch — we love hearing from fans!</p></div>
+    <div class="contact-grid">
+      <div class="contact-form-card fu">
+        <h3>Send a Message</h3>
+        <form id="contact-form" onsubmit="submitContact(event)">
+          <div class="cf-row">
+            <div class="cf-group"><label>Full Name</label><input id="cf-name" type="text" placeholder="Your name" required/></div>
+            <div class="cf-group"><label>Email</label><input id="cf-email" type="email" placeholder="you@email.com" required/></div>
+          </div>
+          <div class="cf-group"><label>Subject</label><input id="cf-subject" type="text" placeholder="Subject" required/></div>
+          <div class="cf-group"><label>Message</label><textarea id="cf-msg" rows="5" placeholder="Your message..." required></textarea></div>
+          <button type="submit" class="btn-gold full">Send Message 📨</button>
+          <div class="cf-success hidden" id="cf-success">✅ Message sent! We'll reply soon.</div>
+        </form>
+      </div>
+      <div class="contact-info fu">
+        <div class="ci-card"><span class="ci-ico">📧</span><div><div class="ci-lbl">Email</div><div class="ci-val">info@iplfanzone.com</div></div></div>
+        <div class="ci-card"><span class="ci-ico">📱</span><div><div class="ci-lbl">Phone</div><div class="ci-val">+91 98765 43210</div></div></div>
+        <div class="ci-card"><span class="ci-ico">📍</span><div><div class="ci-lbl">Address</div><div class="ci-val">Cricket House, MG Road, Mumbai 400001</div></div></div>
+        <div class="ci-social">
+          <h4>Follow Us</h4>
+          <div class="social-row">
+            <a href="#" class="soc-btn" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="soc-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="soc-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="soc-btn" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="soc-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <!-- FAQ -->
+        <div class="faq-wrap">
+          <h4 style="color:var(--gold);margin-bottom:12px">❓ FAQ</h4>
+          <div id="faq-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ OPTIONAL: TICKETS / SHOP ══ -->
+ <section class="section bg-dark2">
+
+  <div class="sec-hdr">
+    <h2 class="sec-title">🎟️ Tickets <span class="gold"></span></h2>
+    <p class="sec-sub">Book match tickets & grab official IPL merchandise</p>
+  </div>
+
+  <div class="ts-grid">
+
+    <div class="ts-card">
+
+      <div class="ts-icon">🎟️</div>
+
+      <h3>Book Tickets</h3>
+
+      <p>
+        Get front-row seats to watch your favourite IPL teams live at iconic stadiums across India.
+      </p>
+
+      <!-- BUTTON -->
+      <button type="button" class="btn-gold sm" onclick="openBooking()">
+        Book Now
+      </button>
+      
+
+    </div>
+
+  </div>
+
+  <!-- POPUP -->
+  <div id="bookingPopup" class="booking-popup">
+
+    <div class="booking-box">
+
+      <span class="close-btn" onclick="closeBooking()">&times;</span>
+
+      <h2>🏏 IPL 2026 Ticket Booking</h2>
+
+      <form onsubmit="bookTicket(event)">
+
+        <input type="text" placeholder="Full Name" required><br><br>
+
+        <input type="email" placeholder="Email Address" required><br><br>
+
+        <input type="tel" placeholder="Mobile Number" required><br><br>
+
+        <select required>
+          <option value="">Select Team</option>
+          <option>Chennai Super Kings</option>
+          <option>Mumbai Indians</option>
+          <option>Royal Challengers Bengaluru</option>
+          <option>Kolkata Knight Riders</option>
+          <option>Sunrisers Hyderabad</option>
+          <option>Gujarat Titans</option>
+          <option>Rajasthan Royals</option>
+          <option>Delhi Capitals</option>
+          <option>Punjab Kings</option>
+          <option>Lucknow Super Giants</option>
+        </select><br><br>
+
+        <input type="date" required><br><br>
+
+        <input type="number" min="1" max="10" placeholder="Number of Tickets" required><br><br>
+
+        <button type="submit" class="btn-gold full">
+          Confirm Booking
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div><span class="footer-logo">🏏 IPL Fan Zone</span><p>Your ultimate IPL companion. Built with ❤️ for cricket fans.</p></div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a><a href="#about">About Team</a><a href="#players">Players</a>
+        <a href="#schedule">Schedule</a><a href="#stats">Statistics</a><a href="#news">News</a>
+        <a href="#gallery">Gallery</a><a href="#fanzone">Fan Zone</a><a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Follow IPL</h4>
+        <div class="social-row">
+          <a href="#" class="soc-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="soc-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="soc-btn"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 IPL Fan Zone. For educational purposes. IPL is a registered trademark of BCCI.</div>
+  </footer>
+
+</div><!-- /main-site -->
+
+<script src="script.js"></script>
+</body>
+</html>
